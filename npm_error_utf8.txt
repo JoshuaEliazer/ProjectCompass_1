@@ -1,0 +1,342 @@
+﻿node.exe : npm warn 
+tar TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\te
+lemetry\post-telemetry-
+payload.js'
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (npm warn tar    
+ TA...try-payload.j    
+s':String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\te
+lemetry\post-telemetry-
+payload.test.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\bu
+ild\webpack\loaders\css
+-loader\src\plugins\pos
+tcss-icss-parser.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\build\webpack\loaders
+\css-loader\src\plugins
+\postcss-icss-parser.js
+'
+npm warn cleanup 
+Failed to remove some 
+directories [
+npm warn cleanup   [
+npm warn cleanup     '\
+\\\?\\C:\\Users\\91798\
+\OneDrive\\Desktop\\Pro
+jectCompass\\node_modul
+es\\next',
+npm warn cleanup     
+[Error: ENOTEMPTY: 
+directory not empty, 
+rmdir 'C:\Users\91798\O
+neDrive\Desktop\Project
+Compass\node_modules\ne
+xt\dist\server'] {
+npm warn cleanup       
+errno: -4051,
+npm warn cleanup       
+code: 'ENOTEMPTY',
+npm warn cleanup       
+syscall: 'rmdir',
+npm warn cleanup       
+path: 'C:\\Users\\91798
+\\OneDrive\\Desktop\\Pr
+ojectCompass\\node_modu
+les\\next\\dist\\server
+'
+npm warn cleanup     }
+npm warn cleanup   ],
+npm warn cleanup   [
+npm warn cleanup     'C
+:\\Users\\91798\\OneDri
+ve\\Desktop\\ProjectCom
+pass\\node_modules\\nex
+t',
+npm warn cleanup     
+[Error: ENOTEMPTY: 
+directory not empty, 
+rmdir 'C:\Users\91798\O
+neDrive\Desktop\Project
+Compass\node_modules\ne
+xt\dist\server'] {
+npm warn cleanup       
+errno: -4051,
+npm warn cleanup       
+code: 'ENOTEMPTY',
+npm warn cleanup       
+syscall: 'rmdir',
+npm warn cleanup       
+path: 'C:\\Users\\91798
+\\OneDrive\\Desktop\\Pr
+ojectCompass\\node_modu
+les\\next\\dist\\server
+'
+npm warn cleanup     }
+npm warn cleanup   ]
+npm warn cleanup ]
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\bu
+ild\webpack\loaders\css
+-loader\src\plugins\pos
+tcss-import-parser.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\build\webpack\loaders
+\css-loader\src\plugins
+\postcss-import-parser.
+js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\bu
+ild\webpack\loaders\nex
+t-font-loader\postcss-n
+ext-font.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\build\webpack\loaders
+\next-font-loader\postc
+ss-next-font.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\bu
+ild\webpack\loaders\css
+-loader\src\plugins\pos
+tcss-url-parser.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\build\webpack\loaders
+\css-loader\src\plugins
+\postcss-url-parser.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\bu
+ild\webpack\loaders\res
+olve-url-loader\lib\pos
+tcss.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\build\webpack\loaders
+\resolve-url-loader\lib
+\postcss.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, lstat 'C:
+\Users\91798\OneDrive\D
+esktop\ProjectCompass\n
+ode_modules\next\dist\e
+sm\server\app-render\rs
+c'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, lstat 'C:
+\Users\91798\OneDrive\D
+esktop\ProjectCompass\n
+ode_modules\next\dist\s
+erver\app-render\rsc'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\server\lib\postponed-
+request-body.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\se
+rver\lib\postponed-requ
+est-body.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\server\app-render\pos
+tponed-state.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\se
+rver\app-render\postpon
+ed-state.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\cl
+ient\components\router-
+reducer\ppr-navigations
+.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\client\components\rou
+ter-reducer\ppr-navigat
+ions.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\server\lib\experiment
+al\ppr.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\se
+rver\lib\experimental\p
+pr.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\cl
+ient\components\segment
+-cache\prefetch.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\client\components\seg
+ment-cache\prefetch.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\es
+m\server\normalizers\re
+quest\prefix.js'
+npm warn tar 
+TAR_ENTRY_ERROR 
+ENOENT: no such file 
+or directory, open 'C:\
+Users\91798\OneDrive\De
+sktop\ProjectCompass\no
+de_modules\next\dist\se
+rver\normalizers\reques
+t\prefix.js'
+npm error code ERR_SSL_
+CIPHER_OPERATION_FAILED
+npm error 8C280000:erro
+r:1C800066:Provider rou
+tines:ossl_gcm_stream_u
+pdate:cipher operation 
+failed:c:\ws\deps\opens
+sl\openssl\providers\im
+plementations\ciphers\c
+iphercommon_gcm.c:325:
+npm error
+npm error A complete 
+log of this run can be 
+found in: C:\Users\9179
+8\AppData\Local\npm-cac
+he\_logs\2026-07-19T10_
+39_37_852Z-debug-0.log
