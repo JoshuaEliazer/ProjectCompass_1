@@ -15,8 +15,77 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   
+  // Security Credentials
+  passwordHash  String?
+  emailVerified Boolean        @default(false)
+  verificationToken String?
+  resetToken    String?
+  resetTokenExpires DateTime?
+  lastLogin     DateTime?
+
+  // Personal Info Settings
+  username      String?        @unique
+  phone         String?
+  bio           String?
+  location      String?
+  college       String?
+  degree        String?
+  gradYear      String?
+  company       String?
+  website       String?
+  githubProfile String?
+  linkedinProfile String?
+  avatarUrl     String?
+
+  // Connected Accounts
+  googleConnected  Boolean    @default(false)
+  githubConnected  Boolean    @default(false)
+  linkedinConnected Boolean   @default(false)
+
+  // Security preferences
+  twoFactorEnabled Boolean    @default(false)
+
+  // Notification Preferences
+  emailNotifications  Boolean   @default(true)
+  pushNotifications   Boolean   @default(false)
+  productUpdates      Boolean   @default(true)
+  aiAnalysisAlerts    Boolean   @default(true)
+  weeklyReports       Boolean   @default(true)
+  marketingEmails     Boolean   @default(false)
+
+  // Appearance
+  themePreference     String    @default("system")
+  accentColor         String    @default("purple")
+
+  // Privacy Settings
+  publicProfile        Boolean   @default(true)
+  showLearningProgress Boolean   @default(true)
+  showUploadedProjects Boolean   @default(true)
+  aiHistoryShared      Boolean   @default(true)
+  shareActivity        Boolean   @default(true)
+
+  // Learning Preferences
+  prefLanguages       String    @default("JavaScript,TypeScript")
+  prefAiModel         String    @default("GPT-4o")
+  dailyLearningGoal   Int       @default(30)
+  weeklyLearningGoal  Int       @default(150)
+  difficultyLevel     String    @default("Beginner")
+  learningStyle       String    @default("Visual")
+
   repoAnalyses  RepoAnalysis[]
   progress      UserProgress[]
+  activeSessions ActiveSession[]
+}
+
+model ActiveSession {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  device      String
+  ipAddress   String
+  location    String?
+  lastActive  DateTime @default(now())
+  createdAt   DateTime @default(now())
 }
 
 model RepoAnalysis {

@@ -24,13 +24,46 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [isAiDrawerOpen, setIsAiDrawerOpen] = useState(false);
+    const [user, setUser] = useState<{ name?: string | null; username?: string | null; email?: string | null } | null>(null);
 
-    // Load and apply theme
+    // Load and apply theme + session
     useEffect(() => {
         const savedTheme = localStorage.getItem("compass-theme") || "dark";
         setTheme(savedTheme);
         document.documentElement.setAttribute("data-theme", savedTheme);
+
+        async function fetchSession() {
+            try {
+                const res = await fetch("/api/auth/session");
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.authenticated && data.user) {
+                        setUser(data.user);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch session details:", err);
+            }
+        }
+        fetchSession();
     }, []);
+
+    // Get initials for profile avatar
+    const getInitials = (nameInput?: string | null, emailInput?: string | null) => {
+        if (nameInput) {
+            const parts = nameInput.trim().split(/\s+/);
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[1][0]).toUpperCase();
+            }
+            return nameInput.substring(0, 2).toUpperCase();
+        }
+        if (emailInput) {
+            return emailInput.substring(0, 2).toUpperCase();
+        }
+        return "MS";
+    };
+
+    const initials = getInitials(user?.name, user?.email);
 
     const toggleTheme = () => {
         const nextTheme = theme === "dark" ? "light" : "dark";
@@ -39,8 +72,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         document.documentElement.setAttribute("data-theme", nextTheme);
     };
 
-    // If the path is /login, render children raw (auth pages have independent pages)
-    if (pathname === "/login") {
+    // If the path is a core authentication screen, render children raw details
+    const isAuthPage = ["/login", "/register", "/forgot-password", "/reset-password", "/verify-email"].includes(pathname);
+    if (isAuthPage) {
         return (
             <ThemeContext.Provider value={{ theme, toggleTheme }}>
                 <div style={{ background: "var(--bg-primary)", color: "var(--fg-primary)", minHeight: "100vh" }}>
@@ -61,7 +95,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         { label: "Bookmarks", path: "#bookmarks", icon: "🔖" },
         { label: "Progress", path: "/software-users", icon: "📈" },
         { label: "Analytics", path: "#analytics", icon: "📊" },
-        { label: "Settings", path: "#settings", icon: "⚙️" },
+        { label: "Settings", path: "/settings", icon: "⚙️" },
     ];
 
     return (
@@ -103,7 +137,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
                                 </svg>
                                 <span style={{ fontWeight: 800, fontSize: "1.15rem", background: "linear-gradient(135deg, var(--fg-primary) 30%, var(--accent-purple) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                                    Compass
+                                    ProjectCompass
                                 </span>
                             </Link>
                         )}
@@ -331,7 +365,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         border: "1px solid var(--border-color)",
                                     }}
                                 >
-                                    MS
+                                    {initials}
                                 </button>
 
                                 {isProfileOpen && (
@@ -350,11 +384,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                         }}
                                     >
                                         <div style={{ padding: "0.4rem 0.5rem", borderBottom: "1px solid var(--border-color)" }}>
-                                            <div style={{ fontWeight: "bold", fontSize: "0.85rem" }}>Mentor Student</div>
-                                            <div style={{ fontSize: "0.75rem", color: "var(--fg-muted)" }}>student@compass.io</div>
+                                            <div style={{ fontWeight: "bold", fontSize: "0.85rem" }}>
+                                                {user?.name || (user?.username ? `@${user.username}` : "Mentor Student")}
+                                            </div>
+                                            <div style={{ fontSize: "0.75rem", color: "var(--fg-muted)" }}>
+                                                {user?.email || "student@compass.io"}
+                                            </div>
                                         </div>
                                         <Link
-                                            href="/login"
+                                            href="/settings"
                                             onClick={() => setIsProfileOpen(false)}
                                             style={{
                                                 display: "block",
@@ -365,8 +403,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                             }}
                                             className="sidebar-link-hover"
                                         >
-                                            🚪 Log Out
+                                            ⚙️ Settings
                                         </Link>
+                                        <button
+                                            onClick={async () => {
+                                                setIsProfileOpen(false);
+                                                await fetch("/api/auth/logout", { method: "POST" });
+                                                router.push("/login");
+                                            }}
+                                            style={{
+                                                display: "block",
+                                                width: "100%",
+                                                textAlign: "left",
+                                                padding: "0.4rem 0.5rem",
+                                                fontSize: "0.8rem",
+                                                color: "var(--fg-secondary)",
+                                                borderRadius: "6px",
+                                            }}
+                                            className="sidebar-link-hover"
+                                        >
+                                            🚪 Log Out
+                                        </button>
                                     </div>
                                 )}
                             </div>
