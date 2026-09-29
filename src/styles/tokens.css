@@ -1,0 +1,72 @@
+:root {
+    /* Colors - Sleek Premium Dark Mode Base */
+    --bg-primary: #09090b;
+    --bg-secondary: #121214;
+    --bg-tertiary: #1a1a1e;
+
+    --fg-primary: #f4f4f5;
+    --fg-secondary: #a1a1aa;
+    --fg-muted: #71717a;
+
+    --accent-cyan: #06b6d4;
+    --accent-cyan-glow: rgba(6, 182, 212, 0.15);
+
+    --accent-purple: #a855f7;
+    --accent-purple-glow: rgba(168, 85, 247, 0.15);
+
+    --accent-emerald: #10b981;
+    --accent-emerald-glow: rgba(16, 185, 129, 0.15);
+
+    /* Glassmorphism & Borders */
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.15);
+
+    --glass-bg: rgba(18, 18, 20, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --glass-blur: blur(12px);
+
+    /* Typography */
+    --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+    --font-mono: var(--font-geist-mono), monospace;
+
+    /* Shadows */
+    --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.3);
+    --glow-purple: 0 0 20px rgba(168, 85, 247, 0.3);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+
+    /* Animation Speeds */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Layout constraints */
+    --max-w-content: 1280px;
+    --sidebar-w: 260px;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f3f5;
+
+    --fg-primary: #18181b;
+    --fg-secondary: #52525b;
+    --fg-muted: #71717a;
+
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.15);
+
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.06);
+
+    --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.12);
+    --glow-purple: 0 0 20px rgba(168, 85, 247, 0.12);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
+    --shadow-premium: 0 20px 30px rgba(0, 0, 0, 0.05);
+}

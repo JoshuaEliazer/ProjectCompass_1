@@ -1,0 +1,241 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  name          String?
+  role          String         @default("USER") // "DEVELOPER" or "USER"
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  // Security Credentials
+  passwordHash  String?
+  emailVerified Boolean        @default(false)
+  verificationToken String?
+  resetToken    String?
+  resetTokenExpires DateTime?
+  lastLogin     DateTime?
+
+  // Personal Info Settings
+  username      String?        @unique
+  phone         String?
+  bio           String?
+  location      String?
+  college       String?
+  degree        String?
+  gradYear      String?
+  company       String?
+  website       String?
+  githubProfile String?
+  linkedinProfile String?
+  avatarUrl     String?
+
+  // Connected Accounts
+  googleConnected  Boolean    @default(false)
+  githubConnected  Boolean    @default(false)
+  linkedinConnected Boolean   @default(false)
+
+  // Security preferences
+  twoFactorEnabled Boolean    @default(false)
+
+  // Notification Preferences
+  emailNotifications  Boolean   @default(true)
+  pushNotifications   Boolean   @default(false)
+  productUpdates      Boolean   @default(true)
+  aiAnalysisAlerts    Boolean   @default(true)
+  weeklyReports       Boolean   @default(true)
+  marketingEmails     Boolean   @default(false)
+
+  // Appearance
+  themePreference     String    @default("system")
+  accentColor         String    @default("purple")
+
+  // Privacy Settings
+  publicProfile        Boolean   @default(true)
+  showLearningProgress Boolean   @default(true)
+  showUploadedProjects Boolean   @default(true)
+  aiHistoryShared      Boolean   @default(true)
+  shareActivity        Boolean   @default(true)
+
+  // Learning Preferences
+  prefLanguages       String    @default("JavaScript,TypeScript")
+  prefAiModel         String    @default("GPT-4o")
+  dailyLearningGoal   Int       @default(30)
+  weeklyLearningGoal  Int       @default(150)
+  difficultyLevel     String    @default("Beginner")
+  learningStyle       String    @default("Visual")
+
+  repoAnalyses  RepoAnalysis[]
+  progress      UserProgress[]
+  activeSessions ActiveSession[]
+  projectNotes  ProjectNote[]
+  projectBookmarks ProjectBookmark[]
+}
+
+model ActiveSession {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  device      String
+  ipAddress   String
+  location    String?
+  lastActive  DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+model RepoAnalysis {
+  id            String       @id @default(uuid())
+  userId        String?
+  user          User?        @relation(fields: [userId], references: [id])
+  repoName      String
+  repoUrl       String?
+  branch        String       @default("main")
+  architecture  String?      // AI generated architecture summary
+  dataFlow      String?      // AI generated data flow summary
+  authFlow      String?      // AI generated auth flow summary
+  apiSummary    String?      // AI generated API details
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  modules          CodeModule[]
+  projectNotes     ProjectNote[]
+  projectBookmarks ProjectBookmark[]
+}
+
+model ProjectNote {
+  id          String       @id @default(uuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analysisId  String
+  analysis    RepoAnalysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  title       String
+  content     String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model ProjectBookmark {
+  id          String       @id @default(uuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analysisId  String
+  analysis    RepoAnalysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  type        String       // "FILE", "MODULE", "FUNCTION", "CLASS"
+  title       String
+  description String?
+  targetPath  String
+  targetId    String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([userId, analysisId, type, targetPath])
+}
+
+model CodeModule {
+  id             String           @id @default(uuid())
+  analysisId     String
+  analysis       RepoAnalysis     @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  filePath       String
+  fileName       String
+  fileType       String           // "file" or "directory"
+  codeContent    String?          // saved only if lightweight/relevant
+  summary        String?          // AI generated summary of this module
+  startingPoint  Boolean          @default(false) // recommend as starting point
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  functions      FunctionDefinition[]
+
+  @@unique([analysisId, filePath])
+}
+
+model FunctionDefinition {
+  id            String      @id @default(uuid())
+  moduleId      String
+  module        CodeModule  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  name          String
+  signature     String?     // function signature / parameters
+  docString     String?     // parsed docstring / comment
+  startLine     Int
+  endLine       Int
+  createdAt     DateTime    @default(now())
+}
+
+model Application {
+  id            String         @id @default(uuid())
+  name          String         @unique // e.g. "Power BI", "Excel", "Canva"
+  description   String?
+  icon          String?        // SVG identifier or URL
+  createdAt     DateTime       @default(now())
+  
+  learningPaths LearningPath[]
+}
+
+model LearningPath {
+  id            String       @id @default(uuid())
+  appId         String
+  application   Application  @relation(fields: [appId], references: [id], onDelete: Cascade)
+  title         String
+  description   String?
+  difficulty    String       @default("Beginner") // "Beginner", "Medium", "Advanced"
+  createdAt     DateTime     @default(now())
+
+  steps         GuideStep[]
+  quizzes       Quiz[]
+  progressList  UserProgress[]
+}
+
+model GuideStep {
+  id             String       @id @default(uuid())
+  learningPathId String
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  order          Int
+  title          String
+  content        String       // Markdown content with walkthrough
+  shortcuts      String?      // Keyboard shortcuts related to this step
+  productivityTips String?    // Highlighted efficiency tips
+  practiceTask   String?      // Inline exercise/task
+  createdAt      DateTime     @default(now())
+}
+
+model Quiz {
+  id             String         @id @default(uuid())
+  learningPathId String
+  learningPath   LearningPath   @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  title          String
+  description    String?
+  createdAt      DateTime       @default(now())
+
+  questions      QuizQuestion[]
+  userProgress   UserProgress[]
+}
+
+model QuizQuestion {
+  id            String   @id @default(uuid())
+  quizId        String
+  quiz          Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  questionText  String
+  options       String   // JSON string of option arrays
+  correctAnswer String   // correct option text or index
+  explanation   String?
+}
+
+model UserProgress {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  learningPathId String
+  learningPath   LearningPath  @relation(fields: [learningPathId], references: [id], onDelete: Cascade)
+  completedSteps String        // Comma-separated list of GuideStep IDs completed
+  quizId         String?       // optional link to quiz progress
+  quiz           Quiz?         @relation(fields: [quizId], references: [id])
+  quizScore      Int?
+  updatedAt      DateTime      @updatedAt
+}
